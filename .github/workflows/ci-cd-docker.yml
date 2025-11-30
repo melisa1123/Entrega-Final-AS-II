@@ -3,7 +3,7 @@ name: CI/CD Docker Pipeline
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t myapp:${{ github.sha }} .
+          docker build -t rappiPet:${{ github.sha }} .
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
@@ -30,11 +30,11 @@ jobs:
 
       # Puedes agregar aquí pasos para ejecutar tests o subir la imagen a un registry
       # - name: Run tests
-      #   run: docker run myapp:latest pytest
+      #   run: docker run rappiPet:latest pytest
       # - name: Login to DockerHub
       #   uses: docker/login-action@v3
       #   with:
       #     username: ${{ secrets.DOCKERHUB_USERNAME }}
       #     password: ${{ secrets.DOCKERHUB_TOKEN }}
       # - name: Push image
-      #   run: docker push myapp:latest
+      #   run: docker push rappiPet:latest
