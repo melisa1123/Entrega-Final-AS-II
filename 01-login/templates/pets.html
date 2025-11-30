@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Mis Mascotas - RappiPet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      background: #f8fafc;
+    }
+
+    .pet-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #4e73df;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2><i class="fa-solid fa-dog"></i> Mis Mascotas</h2>
+      <a href="/pets/new" class="btn btn-success">
+        <i class="fa fa-plus"></i> Nueva Mascota
+      </a>
+    </div>
+    <table class="table table-hover bg-white rounded shadow-sm">
+      <thead class="table-light">
+        <tr>
+          <th>Foto</th>
+          <th>Nombre</th>
+          <th>Tipo</th>
+          <th>Raza</th>
+          <th>Edad</th>
+          <th>Peso (kg)</th>
+          <th>Notas</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for pet in pets %}
+        <tr>
+          <td>
+          <img src="{{ pet.photo_url or url_for('static', filename='pets.jpg') }}" class="pet-avatar" alt="Mascota">
+          </td>
+          <td>{{ pet.nombre }}</td>
+          <td>{{ pet.tipo }}</td>
+          <td>{{ pet.raza }}</td>
+          <td>{{ pet.edad }} años</td>
+          <td>{{ pet.peso }}</td>
+          <td>{{ pet.notas }}</td>
+          <td>
+            <a href="/pets/{{ pet.id_mascota }}/edit" class="btn btn-sm btn-primary" title="Editar">
+              <i class="fa fa-edit"></i> Editar
+            </a>
+            <a href="/pets/{{ pet.id_mascota }}" class="btn btn-sm btn-info" title="Ver">
+              <i class="fa fa-eye"></i>
+            </a>
+            <a href="/pets/{{ pet.id_mascota }}/delete" class="btn btn-sm btn-danger" title="Eliminar">
+              <i class="fa fa-trash"></i> Eliminar
+            </a>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="8" class="text-center text-muted">No tienes mascotas registradas.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="/" class="btn btn-link mt-3"><i class="fa fa-arrow-left"></i> Volver al Dashboard</a>
+  </div>
+</body>
+
+</html>

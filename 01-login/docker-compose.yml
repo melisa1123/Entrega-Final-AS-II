@@ -1,0 +1,28 @@
+version: "3.9"   # Versión de docker-compose
+
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123   # contraseña root
+      MYSQL_DATABASE: testdb         # BD inicial
+      MYSQL_USER: userdb             # usuario adicional
+      MYSQL_PASSWORD: user123        # contraseña usuario
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql  # persistencia de datos
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer_container
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mariadb
+
+volumes:
+  mariadb_data:

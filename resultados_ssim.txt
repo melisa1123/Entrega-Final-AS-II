@@ -1,0 +1,2 @@
+Resultados de SSIM para cada imagen filtrada:
+
